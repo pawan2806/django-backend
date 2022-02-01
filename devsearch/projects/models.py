@@ -1,7 +1,7 @@
 from email.policy import default
 from django.db import models
 import uuid
-
+from users.models import Profile
 from django.db.models.base import Model
 from django.db.models.constraints import Deferrable
 # Create your models here.
@@ -9,6 +9,7 @@ from django.db.models.constraints import Deferrable
 
 
 class Project(models.Model):
+    owner=models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     feature_image = models.ImageField(null=True, blank=True, default="default.jpeg")
